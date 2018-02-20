@@ -64,11 +64,10 @@ function getPages() {
     });
 }
 
-function getPage(pageId) {
-    FB.api('id?fields=name,accounts', function(response) {
+function getPage(pageId, accessToken) {
+    FB.api(pageId + '/posts?access_token=' + accessToken, function(response) {
             if (response && !response.error) {
                 console.log(response);
-                buildPages(response);
             }
         });
 }
@@ -89,7 +88,7 @@ function buildPages(user) {
                         <li>Page id: ${accounts[i].id}</li>
                         <li>Category: ${accounts[i].category}</li>
                     </ul>
-                    <button type="button" class="btn btn-lg btn-block btn-outline-primary" onclick="getPage("${accounts[i].id}")">Select</button>
+                    <button type="button" id="button-${i}" class="btn btn-lg btn-block btn-outline-primary" onclick="getPage('${accounts[i].id}','${accounts[i].access_token}');">Select</button>
                 </div>
             </div>
         `
