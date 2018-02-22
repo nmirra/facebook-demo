@@ -56,26 +56,32 @@ function logout() {
 }
 
 function getPages() {
-    FB.api('me?fields=name,accounts', function(response) {
+    let meNode = 'me';
+    let fields = 'name, accounts{picture,id,name,access_token,category}';
+    FB.api(meNode + '?fields=' + fields, function(response) {
         if (response && !response.error) {
             console.log(response);
-            buildPages(response);
+            showPages(response);
         }
     });
 }
 
 function getPage(pageId, accessToken) {
-    FB.api(pageId + '/posts?access_token=' + accessToken, function(response) {
+    let promotablePostsNode = 'promotable_posts';
+    let fields = 'is_published,created_time,picture,message&include_hidden=true';
+    FB.api(pageId + '/' + promotablePostsNode + '?fields=' + fields + '&access_token=' + accessToken, function(response) {
             if (response && !response.error) {
                 console.log(response);
+                showPosts(response);
             }
-        });
+    });
 }
 
-function buildPages(user) {
+function showPages(user) {
     document.getElementById('pages-heading').innerHTML = user.name + " - Manage your pages";
-    var accounts = user.accounts.data;
-    var htmlForPages = "";
+    document.getElementById('posts').style.display = 'none';
+    let accounts = user.accounts.data;
+    let htmlForPages = "";
 
     for (let i in accounts) {
         htmlForPages += `
@@ -88,10 +94,34 @@ function buildPages(user) {
                         <li>Page id: ${accounts[i].id}</li>
                         <li>Category: ${accounts[i].category}</li>
                     </ul>
-                    <button type="button" id="button-${i}" class="btn btn-lg btn-block btn-outline-primary" onclick="getPage('${accounts[i].id}','${accounts[i].access_token}');">Select</button>
+                    <button type="button" id="button-${i}" class="btn btn-lg btn-block btn-outline-primary"
+                            onclick="getPage('${accounts[i].id}','${accounts[i].access_token}');">Select</button>
                 </div>
             </div>
         `
     }
     document.getElementById('pages-list').innerHTML = htmlForPages;
+    document.getElementById('pages').style.display = 'block';
+}
+
+function showPosts(posts) {
+    document.getElementById('pages').style.display = 'none';
+    let postsData = posts.data;
+    let htmlForPublishedPosts = ``;
+
+    let htmlForUnPublishedPosts = ``;
+
+    for (let i in postsData) {
+        if (postsData.is_published === 'true') {
+            htmlForPublishedPosts += ``;
+         } else {
+            htmlForUnPublishedPosts += ``;
+         }
+    }
+
+    htmlForPublishedPosts += `</div>`;
+    htmlForUnPublishedPosts += `</div>`;
+
+    //document.getElementById('posts-list').innerHTML = + htmlForPublishedPosts + htmlForUnPublishedPosts;
+    document.getElementById('posts').style.display = 'block';
 }

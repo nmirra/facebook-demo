@@ -3,9 +3,10 @@
     <head>
         <meta charset="UTF-8">
         <title>Facebook App</title>
+        <link rel="icon" href="https://static.xx.fbcdn.net/rsrc.php/yl/r/H3nktOa7ZMg.ico">
         <link rel="stylesheet" href="https://getbootstrap.com/dist/css/bootstrap.min.css"/>
         <style media="screen">
-            #pages, #logout{display:none}
+            #pages, #posts, #logout{display:none}
             #heading, #pages-heading, #pages-list{margin-top: 40px}
         </style>
     </head>
@@ -36,6 +37,49 @@
                 <h2 id="pages-heading"></h2>
                 <div class="card-deck mb-3 text-center" id="pages-list">
                 </div>
+            </div>
+            <div class="container" id="posts">
+                <h2 id="posts-heading"></h2>
+                <main role="main" class="container">
+                    <div class="d-flex align-items-center p-3 my-3 text-white-50 bg-secondary rounded box-shadow">
+                        <img class="mr-3" src="https://gigaom.com/wp-content/uploads/sites/1/2012/02/fb-logo1.png" alt="" width="48" height="48">
+                        <div class="lh-100">
+                            <h4 id="page" class="mb-0 text-white lh-100">Facebook Posts</h4>
+                        </div>
+                    </div>
+
+                    <div class="my-3 p-3 bg-white rounded box-shadow">
+                        <h6 class="border-bottom border-gray pb-2 mb-0">Published Posts</h6>
+                        <div class="media text-muted pt-3">
+                            <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+                                <strong class="d-block text-gray-dark">@username</strong>
+                                Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.
+                            </p>
+                        </div>
+                        <div class="media text-muted pt-3">
+                            <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+                                <strong class="d-block text-gray-dark">@username</strong>
+                                Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="my-3 p-3 bg-white rounded box-shadow">
+                        <h6 class="border-bottom border-gray pb-2 mb-0">Unpublished Posts</h6>
+                        <div class="media text-muted pt-3">
+                            <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+                                <strong class="d-block text-gray-dark">@username</strong>
+                                Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.
+                            </p>
+                        </div>
+                        <div class="media text-muted pt-3">
+                            <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+                                <strong class="d-block text-gray-dark">@username</strong>
+                                Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.
+                            </p>
+                        </div>
+                    </div>
+                </main>
             </div>
         </div>
 
