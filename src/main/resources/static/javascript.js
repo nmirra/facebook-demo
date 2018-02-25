@@ -94,7 +94,7 @@ function getPage(pageId, accessToken) {
 function populateViews(ids, accessToken) {
 
     ids.forEach(function(id, index, array) {
-        FB.api(id + '/insights/post_impressions_viral/lifetime?access_token=' + accessToken, function(response) {
+        FB.api(id + '/insights/post_impressions_unique/lifetime?access_token=' + accessToken, function(response) {
                     if (response && !response.error) {
                         var views = response.data[0].values[0].value;
                         document.getElementById('published-' + index).innerHTML = "Viewed by : " + views;
@@ -125,6 +125,9 @@ function createNewPost(pageId, accessToken) {
                 if (response && !response.error) {
                     alert("Post id: " + response.id + " successfully created!");
                     getPage(pageId, accessToken);
+                } else {
+                    var message = response.error.message;
+                    alert("There was an error posting your message, please try again. Error message: " + message);
                 }
              }
         );
